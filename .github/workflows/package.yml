@@ -16,9 +16,9 @@ jobs:
         ref: master
     - name: Package
       run: |
-        npm ci
-        npm test
-        npm run package
+        yarn install --pure-lockfile
+        yarn test
+        yarn package
     - name: Commit
       run: |
         git config --global user.name "GitHub Actions"
