@@ -261,7 +261,7 @@ async function run() {
     const cluster = core.getInput('cluster', { required: true });
     const count = parseInt(core.getInput('count', { required: true }));
     const networkConfiguration: aws.ECS.NetworkConfiguration = JSON.parse(
-      core.getInput('networkConfiguration', { required: true }),
+      core.getInput('network-configuration', { required: true }),
     );
     const startedBy =
       core.getInput('started-by', { required: false }) ||
