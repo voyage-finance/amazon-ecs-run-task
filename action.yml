@@ -10,6 +10,9 @@ inputs:
   cluster:
     description: "The name of the ECS cluster."
     required: true
+  network-configuration:
+    description: "JSON serialized network configuration for the task."
+    required: true
   count:
     description: "The count of tasks to run. Will default to 1"
     required: true
