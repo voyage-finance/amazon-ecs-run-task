@@ -1142,7 +1142,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.34.0
     "@vercel/ncc": ^0.34.0
     "@zeit/ncc": ^0.22.3
-    aws-sdk: ^2.1195.0
+    aws-sdk: ^2.1200.0
     eslint: ^8.22.0
     eslint-plugin-github: ^4.3.7
     eslint-plugin-jest: ^26.8.7
@@ -1372,9 +1372,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-sdk@npm:^2.1195.0":
-  version: 2.1200.0
-  resolution: "aws-sdk@npm:2.1200.0"
+"aws-sdk@npm:^2.1200.0":
+  version: 2.1201.0
+  resolution: "aws-sdk@npm:2.1201.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -1386,7 +1386,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: 9fcff0128b63abab899e84da9622995e5b87445cca2962839a54cdf284f368faf23893fc578c8f9477694e9b0d4f853644af2138b28b1cccc92e40be6bf431d2
+  checksum: e86b92c5194f2378362d4c21fedca4e3906c9a5ca03dafa0799ec3db5793c21cf9bf9be81fefdbf9220bfab80a5dc560c2efb0af556df87981d642f4b447fda4
   languageName: node
   linkType: hard
 

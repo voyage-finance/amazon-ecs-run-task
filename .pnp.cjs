@@ -41,7 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@vercel/ncc", "npm:0.34.0"],\
             ["@zeit/ncc", "npm:0.22.3"],\
-            ["aws-sdk", "npm:2.1200.0"],\
+            ["aws-sdk", "npm:2.1201.0"],\
             ["eslint", "npm:8.22.0"],\
             ["eslint-plugin-github", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:4.3.7"],\
             ["eslint-plugin-jest", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:26.8.7"],\
@@ -1804,7 +1804,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@vercel/ncc", "npm:0.34.0"],\
             ["@zeit/ncc", "npm:0.22.3"],\
-            ["aws-sdk", "npm:2.1200.0"],\
+            ["aws-sdk", "npm:2.1201.0"],\
             ["eslint", "npm:8.22.0"],\
             ["eslint-plugin-github", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:4.3.7"],\
             ["eslint-plugin-jest", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:26.8.7"],\
@@ -2071,10 +2071,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["aws-sdk", [\
-        ["npm:2.1200.0", {\
-          "packageLocation": "./.yarn/cache/aws-sdk-npm-2.1200.0-ee13248120-9fcff0128b.zip/node_modules/aws-sdk/",\
+        ["npm:2.1201.0", {\
+          "packageLocation": "./.yarn/cache/aws-sdk-npm-2.1201.0-a1ba519115-e86b92c519.zip/node_modules/aws-sdk/",\
           "packageDependencies": [\
-            ["aws-sdk", "npm:2.1200.0"],\
+            ["aws-sdk", "npm:2.1201.0"],\
             ["buffer", "npm:4.9.2"],\
             ["events", "npm:1.1.1"],\
             ["ieee754", "npm:1.1.13"],\
