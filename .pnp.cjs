@@ -40,7 +40,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@typescript-eslint/parser", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@vercel/ncc", "npm:0.34.0"],\
-            ["@zeit/ncc", "npm:0.22.3"],\
             ["aws-sdk", "npm:2.1201.0"],\
             ["eslint", "npm:8.22.0"],\
             ["eslint-plugin-github", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:4.3.7"],\
@@ -1810,7 +1809,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@typescript-eslint/parser", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@vercel/ncc", "npm:0.34.0"],\
-            ["@zeit/ncc", "npm:0.22.3"],\
             ["aws-sdk", "npm:2.1201.0"],\
             ["eslint", "npm:8.22.0"],\
             ["eslint-plugin-github", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:4.3.7"],\
@@ -1822,16 +1820,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["yaml", "npm:2.1.1"]\
           ],\
           "linkType": "SOFT"\
-        }]\
-      ]],\
-      ["@zeit/ncc", [\
-        ["npm:0.22.3", {\
-          "packageLocation": "./.yarn/cache/@zeit-ncc-npm-0.22.3-7fa2d32942-5528bff2fe.zip/node_modules/@zeit/ncc/",\
-          "packageDependencies": [\
-            ["@zeit/ncc", "npm:0.22.3"],\
-            ["node-gyp", "npm:9.1.0"]\
-          ],\
-          "linkType": "HARD"\
         }]\
       ]],\
       ["abbrev", [\

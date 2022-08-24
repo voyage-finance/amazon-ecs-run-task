@@ -1148,7 +1148,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.34.0
     "@typescript-eslint/parser": ^5.34.0
     "@vercel/ncc": ^0.34.0
-    "@zeit/ncc": ^0.22.3
     aws-sdk: ^2.1200.0
     eslint: ^8.22.0
     eslint-plugin-github: ^4.3.7
@@ -1160,17 +1159,6 @@ __metadata:
     yaml: ^2.1.1
   languageName: unknown
   linkType: soft
-
-"@zeit/ncc@npm:^0.22.3":
-  version: 0.22.3
-  resolution: "@zeit/ncc@npm:0.22.3"
-  dependencies:
-    node-gyp: latest
-  bin:
-    ncc: dist/ncc/cli.js
-  checksum: 5528bff2fe0d10437bfaac68f344069627b9cd4babb4181b92721b85150463cbc80b55d86b4282f807326193d92d6cfaabf124d9d9029cc036feba6841179369
-  languageName: node
-  linkType: hard
 
 "abbrev@npm:1":
   version: 1.1.1
