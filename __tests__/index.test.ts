@@ -1,5 +1,5 @@
 import run from '../src';
-import core from '@actions/core';
+import * as core from '@actions/core';
 import fs from 'fs';
 import path from 'path';
 
@@ -88,10 +88,7 @@ jest.mock('@actions/core', () => {
   return {
     __esModule: true,
     ...mockedActions,
-    default: {
-      ...mockedActions,
-      getInput: jest.fn(),
-    },
+    getInput: jest.fn(),
   };
 });
 
@@ -117,6 +114,13 @@ jest.mock('fs', () => ({
   },
 }));
 
+const networkConfiguration = {
+  awsvpcConfiguration: {
+    subnets: ['subnet-0006a81c3fb6df455', 'subnet-03b288826d0463c1d'],
+    securityGroups: ['sg-0706a4351efc1eb0c'],
+    assignPublicIp: 'ENABLED',
+  },
+};
 describe('Deploy to ECS', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -125,6 +129,7 @@ describe('Deploy to ECS', () => {
       .mockReturnValueOnce('task-definition.json') // task-definition
       .mockReturnValueOnce('cluster-789') // cluster
       .mockReturnValueOnce('1') // count
+      .mockReturnValueOnce(JSON.stringify(networkConfiguration))
       .mockReturnValueOnce('amazon-ecs-run-task-for-github-actions'), // started-by
       (process.env = Object.assign(process.env, {
         GITHUB_WORKSPACE: __dirname,
@@ -152,6 +157,7 @@ describe('Deploy to ECS', () => {
     expect(mockRunTasks).toHaveBeenNthCalledWith(1, {
       cluster: 'cluster-789',
       taskDefinition: 'task:def:arn',
+      networkConfiguration,
       count: 1,
       startedBy: 'amazon-ecs-run-task-for-github-actions',
     });
@@ -168,6 +174,7 @@ describe('Deploy to ECS', () => {
       .mockReturnValueOnce('task-definition.json') // task-definition
       .mockReturnValueOnce('cluster-789') // cluster
       .mockReturnValueOnce('1') // count
+      .mockReturnValueOnce(JSON.stringify(networkConfiguration))
       .mockReturnValueOnce('amazon-ecs-run-task-for-github-actions') // started-by
       .mockReturnValueOnce('true');
     await run();

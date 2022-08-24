@@ -202,11 +202,11 @@ async function tasksExitCode(
     core.info(`All tasks have exited successfully.`);
   }
 }
-
 async function runTask(
   ecs: aws.ECS,
   cluster: string,
   taskDefArn: string,
+  networkConfiguration: aws.ECS.NetworkConfiguration,
   count: number,
   startedBy: string,
   waitForFinish: string,
@@ -217,6 +217,7 @@ async function runTask(
     .runTask({
       cluster,
       taskDefinition: taskDefArn,
+      networkConfiguration,
       startedBy,
       count,
     })
@@ -259,6 +260,9 @@ async function run() {
     });
     const cluster = core.getInput('cluster', { required: true });
     const count = parseInt(core.getInput('count', { required: true }));
+    const networkConfiguration: aws.ECS.NetworkConfiguration = JSON.parse(
+      core.getInput('networkConfiguration', { required: true }),
+    );
     const startedBy =
       core.getInput('started-by', { required: false }) ||
       'amazon-ecs-run-task-for-github-actions';
@@ -310,6 +314,7 @@ async function run() {
       ecs,
       cluster,
       taskDefArn,
+      networkConfiguration,
       count,
       startedBy,
       waitForFinish,
