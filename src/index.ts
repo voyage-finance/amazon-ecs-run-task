@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 import aws from 'aws-sdk';
 import {
   Container,
