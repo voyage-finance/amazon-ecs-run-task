@@ -16,7 +16,7 @@ jobs:
         ref: master
     - name: Package
       run: |
-        yarn install --pure-lockfile
+        yarn install --immutable --immutable-cache --check-cache
         yarn test
         yarn package
     - name: Commit
