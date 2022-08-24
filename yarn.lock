@@ -965,10 +965,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^18.7.10":
+"@types/node@npm:*":
   version: 18.7.10
   resolution: "@types/node@npm:18.7.10"
   checksum: 4e9d883762db9d854ba462d89014d4eb4fc90027c33a3573af9e4e7a0fe161f05b7b5382083c9305ce60a5c84622eae42d1bf19c5103859e69b135a2f8278e12
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.7.12":
+  version: 18.7.12
+  resolution: "@types/node@npm:18.7.12"
+  checksum: 61755955729081cea40e7e25054ce53b7f2ddc84635f94d03d80e55c5376b8c298dd2379d31f8f07c928b6da7b020dcde65ebb6e12ffb8b56a5e51c2b02b5b51
   languageName: node
   linkType: hard
 
@@ -1137,7 +1144,7 @@ __metadata:
     "@actions/core": ^1.6.0
     "@jest/globals": ^28.1.3
     "@types/jest": ^28.1.7
-    "@types/node": ^18.7.10
+    "@types/node": ^18.7.12
     "@typescript-eslint/eslint-plugin": ^5.34.0
     "@typescript-eslint/parser": ^5.34.0
     "@vercel/ncc": ^0.34.0

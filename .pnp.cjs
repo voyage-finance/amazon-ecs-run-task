@@ -36,7 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@actions/core", "npm:1.9.1"],\
             ["@jest/globals", "npm:28.1.3"],\
             ["@types/jest", "npm:28.1.7"],\
-            ["@types/node", "npm:18.7.10"],\
+            ["@types/node", "npm:18.7.12"],\
             ["@typescript-eslint/eslint-plugin", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@typescript-eslint/parser", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@vercel/ncc", "npm:0.34.0"],\
@@ -1465,6 +1465,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.7.10"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:18.7.12", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-18.7.12-7a1f00cea7-6175595572.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:18.7.12"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/prettier", [\
@@ -1799,7 +1806,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@actions/core", "npm:1.9.1"],\
             ["@jest/globals", "npm:28.1.3"],\
             ["@types/jest", "npm:28.1.7"],\
-            ["@types/node", "npm:18.7.10"],\
+            ["@types/node", "npm:18.7.12"],\
             ["@typescript-eslint/eslint-plugin", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@typescript-eslint/parser", "virtual:48f56041344524327a1e26ad8df4fbaeb52956322a64bdf8ea0825e17a1ccfc3e93a8dbb739300cd4769f55cd6baa4183756d58b7b371b6159c8f673ebe24d1f#npm:5.34.0"],\
             ["@vercel/ncc", "npm:0.34.0"],\
