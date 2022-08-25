@@ -147,16 +147,26 @@ async function waitForTasksStopped(
 
   core.debug('Waiting for tasks to stop');
 
-  const waitTaskResponse = await ecs
-    .waitFor('tasksStopped', {
-      cluster: clusterName,
-      tasks: taskArns,
-      $waiter: {
-        delay: WAIT_DEFAULT_DELAY_SEC,
-        maxAttempts: maxAttempts,
+  const waitTaskResponse = await new Promise((resolve, reject) => {
+    ecs.waitFor(
+      'tasksStopped',
+      {
+        cluster: clusterName,
+        tasks: taskArns,
+        $waiter: {
+          delay: WAIT_DEFAULT_DELAY_SEC,
+          maxAttempts: maxAttempts,
+        },
       },
-    })
-    .promise();
+      (err, data) => {
+        if (err) {
+          if (!err.retryable) return reject(err);
+        } else {
+          resolve(data);
+        }
+      },
+    );
+  });
 
   core.debug(`Run task response ${JSON.stringify(waitTaskResponse)}`);
 
