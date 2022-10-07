@@ -1,13 +1,20 @@
 import * as core from '@actions/core';
 import aws from 'aws-sdk';
-import {
-  Container,
-  RegisterTaskDefinitionRequest,
-  TaskDefinition,
-} from 'aws-sdk/clients/ecs';
 import fs from 'fs';
 import path from 'path';
 import yaml from 'yaml';
+
+import {
+  Container,
+  DescribeTasksCommand,
+  ECSClient,
+  NetworkConfiguration,
+  RegisterTaskDefinitionCommand,
+  RegisterTaskDefinitionCommandInput,
+  RunTaskCommand,
+  TaskDefinition,
+  waitUntilTasksStopped,
+} from '@aws-sdk/client-ecs';
 
 const MAX_WAIT_MINUTES = 360; // 6 hours
 const WAIT_DEFAULT_DELAY_SEC = 15;
@@ -134,7 +141,7 @@ function validateProxyConfigurations(taskDef: TaskDefinition) {
 }
 
 async function waitForTasksStopped(
-  ecs: aws.ECS,
+  ecs: ECSClient,
   clusterName: string,
   taskArns: string[],
   waitForMinutes: number,
@@ -145,51 +152,40 @@ async function waitForTasksStopped(
 
   const maxAttempts = (waitForMinutes * 60) / WAIT_DEFAULT_DELAY_SEC;
 
-  core.debug('Waiting for tasks to stop');
   core.info(`Max attempts: ${maxAttempts}`);
   core.info(`Wait interval: ${WAIT_DEFAULT_DELAY_SEC}`);
+  core.info(`Task arns: ${taskArns}`);
+  core.info(`Cluster name: ${clusterName}`);
 
-  const waitTaskResponse = await new Promise((resolve, reject) => {
-    ecs.waitFor(
-      'tasksStopped',
-      {
-        cluster: clusterName,
-        tasks: taskArns,
-        $waiter: {
-          delay: WAIT_DEFAULT_DELAY_SEC,
-          maxAttempts: maxAttempts,
-        },
-      },
-      (err, data) => {
-        if (err) {
-          core.error(`Failed waiting for task to be in stopped state: ${err}`);
-          reject(err);
-          return;
-        }
-        core.info(`Task state: ${data.tasks}`);
-        resolve(data);
-      },
-    );
-  });
+  const res = await waitUntilTasksStopped(
+    {
+      client: ecs,
+      maxDelay: WAIT_DEFAULT_DELAY_SEC,
+      maxWaitTime: 5 * 60,
+    },
+    {
+      cluster: clusterName,
+      tasks: taskArns,
+    },
+  );
 
-  core.debug(`Run task response ${JSON.stringify(waitTaskResponse)}`);
-
+  core.info(`Tasks stopped waiter response ${JSON.stringify(res)}`);
   core.info(
     `All tasks have stopped. Watch progress in the Amazon ECS console: https://console.aws.amazon.com/ecs/home?region=${aws.config.region}#/clusters/${clusterName}/tasks`,
   );
 }
 
 async function tasksExitCode(
-  ecs: aws.ECS,
+  ecs: ECSClient,
   clusterName: string,
   taskArns: string[],
 ) {
-  const describeResponse = await ecs
-    .describeTasks({
+  const describeResponse = await ecs.send(
+    new DescribeTasksCommand({
       cluster: clusterName,
       tasks: taskArns,
-    })
-    .promise();
+    }),
+  );
 
   const containers: Container[] = [];
   describeResponse.tasks?.forEach((task) => {
@@ -217,26 +213,24 @@ async function tasksExitCode(
   }
 }
 async function runTask(
-  ecs: aws.ECS,
+  ecs: ECSClient,
   cluster: string,
   taskDefArn: string,
-  networkConfiguration: aws.ECS.NetworkConfiguration,
+  networkConfiguration: NetworkConfiguration,
   count: number,
   startedBy: string,
   waitForFinish: string,
   waitForMinutes: number,
 ) {
   core.debug('Running task');
-  const runTaskResponse = await ecs
-    .runTask({
-      cluster,
-      taskDefinition: taskDefArn,
-      networkConfiguration,
-      startedBy,
-      count,
-    })
-    .promise();
-
+  const runTaskCommand = new RunTaskCommand({
+    cluster,
+    taskDefinition: taskDefArn,
+    networkConfiguration,
+    startedBy,
+    count,
+  });
+  const runTaskResponse = await ecs.send(runTaskCommand);
   core.debug(`Run task response: ${JSON.stringify(runTaskResponse, null, 4)}`);
   if (runTaskResponse.failures && runTaskResponse.failures.length > 0) {
     const [failure] = runTaskResponse.failures;
@@ -265,7 +259,7 @@ async function runTask(
 
 async function run() {
   try {
-    const ecs = new aws.ECS({
+    const ecs = new ECSClient({
       customUserAgent: 'amazon-ecs-deploy-task-definition-for-github-actions',
     });
     // Get inputs
@@ -298,11 +292,10 @@ async function run() {
     );
     let registerResponse;
     try {
-      registerResponse = await ecs
-        .registerTaskDefinition(
-          taskDefContents as RegisterTaskDefinitionRequest,
-        )
-        .promise();
+      const registerTaskCommand = new RegisterTaskDefinitionCommand(
+        taskDefContents as RegisterTaskDefinitionCommandInput,
+      );
+      registerResponse = await ecs.send(registerTaskCommand);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       core.setFailed(
