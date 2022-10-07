@@ -146,17 +146,31 @@ async function waitForTasksStopped(
   const maxAttempts = (waitForMinutes * 60) / WAIT_DEFAULT_DELAY_SEC;
 
   core.debug('Waiting for tasks to stop');
+  core.info(`Max attempts: ${maxAttempts}`);
+  core.info(`Wait interval: ${WAIT_DEFAULT_DELAY_SEC}`);
 
-  const waitTaskResponse = await ecs
-    .waitFor('tasksStopped', {
-      cluster: clusterName,
-      tasks: taskArns,
-      $waiter: {
-        delay: WAIT_DEFAULT_DELAY_SEC,
-        maxAttempts: maxAttempts,
+  const waitTaskResponse = await new Promise((resolve, reject) => {
+    ecs.waitFor(
+      'tasksStopped',
+      {
+        cluster: clusterName,
+        tasks: taskArns,
+        $waiter: {
+          delay: WAIT_DEFAULT_DELAY_SEC,
+          maxAttempts: maxAttempts,
+        },
       },
-    })
-    .promise();
+      (err, data) => {
+        if (err) {
+          core.error(`Failed waiting for task to be in stopped state: ${err}`);
+          reject(err);
+          return;
+        }
+        core.info(`Task state: ${data.tasks}`);
+        resolve(data);
+      },
+    );
+  });
 
   core.debug(`Run task response ${JSON.stringify(waitTaskResponse)}`);
 
